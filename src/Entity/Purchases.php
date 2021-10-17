@@ -27,6 +27,11 @@ class Purchases
      */
     private $person;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $ordering;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -52,6 +57,18 @@ class Purchases
     public function setPerson(?Person $person): self
     {
         $this->person = $person;
+
+        return $this;
+    }
+
+    public function getOrdering(): ?int
+    {
+        return $this->ordering;
+    }
+
+    public function setOrdering(?int $ordering): self
+    {
+        $this->ordering = $ordering;
 
         return $this;
     }

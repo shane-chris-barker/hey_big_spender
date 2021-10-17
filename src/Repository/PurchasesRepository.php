@@ -19,6 +19,17 @@ class PurchasesRepository extends ServiceEntityRepository
         parent::__construct($registry, Purchases::class);
     }
 
+    public function findByPersonAndOrder(int $personId, int $orderId)
+    {
+        return $this->createQueryBuilder('p')
+            ->where('p.person = :person')
+            ->andWhere('p.ordering = :order')
+            ->setParameters(['person' => $personId, 'order' => $orderId])
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return Purchases[] Returns an array of Purchases objects
     //  */

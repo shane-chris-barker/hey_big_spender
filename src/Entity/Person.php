@@ -30,6 +30,16 @@ class Person
      */
     private $purchases;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $earnings_per_second;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $image_path;
+
 
     public function __construct()
     {
@@ -79,6 +89,30 @@ class Person
                 $purchase->setPerson(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEarningsPerSecond(): ?int
+    {
+        return $this->earnings_per_second;
+    }
+
+    public function setEarningsPerSecond(?int $earnings_per_second): self
+    {
+        $this->earnings_per_second = $earnings_per_second;
+
+        return $this;
+    }
+
+    public function getImagePath(): ?string
+    {
+        return $this->image_path;
+    }
+
+    public function setImagePath(?string $image_path): self
+    {
+        $this->image_path = $image_path;
 
         return $this;
     }
