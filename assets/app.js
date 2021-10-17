@@ -4,7 +4,19 @@
  * We recommend including the built version of this JavaScript file
  * (and its CSS file) in your base layout (base.html.twig).
  */
+import Alpine from 'alpinejs'
 
+
+
+Alpine.data('dropdown', () => ({
+    open: false,
+
+    toggle() {
+        this.open = ! this.open
+    }
+}))
+window.Alpine = Alpine;
+window.Alpine.start();
 // any CSS you import will output into a single css file (app.scss in this case)
 import './styles/app.scss';
 

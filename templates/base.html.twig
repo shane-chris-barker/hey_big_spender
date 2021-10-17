@@ -1,19 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {# Run `composer require symfony/webpack-encore-bundle`
-           and uncomment the following Encore helpers to start using Symfony UX #}
-        {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
-        {% endblock %}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-        {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<!-- Responsive navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+{#        <a class="navbar-brand" href="{{ path('home') }}">ShaneChrisBarker.co.uk</a>#}
+{#        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>#}
+{#        <div class="collapse navbar-collapse" id="navbarSupportedContent">#}
+{#            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">#}
+{#                <li class="nav-item"><a class="nav-link" href="{{ path('home') }}">Home</a></li>#}
+{#                <li class="nav-item"><a class="nav-link" href="{{ path('articles_index') }}">Articles</a></li>#}
+{#                <li class="nav-item"><a class="nav-link" href="{{ path('contact') }}">Contact</a></li>#}
+{#                <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Blog</a></li>#}
+{#            </ul>#}
+{#        </div>#}
+    </div>
+</nav>
+{% block body %}{% endblock %}
+</body>
+<footer class="bg-gray-900">
+    <div class="container max-w-6xl mx-auto flex items-center px-2 py-8">
+
+        <div class="w-full mx-auto flex flex-wrap items-center">
+            <div class="flex w-full md:w-1/2 justify-center md:justify-start text-white font-extrabold">
+                <a class="text-gray-900 no-underline hover:text-gray-900 hover:no-underline" href="#">
+                    👻 <span class="text-base text-gray-200">Ghostwind CSS</span>
+                </a>
+            </div>
+            <div class="flex w-full pt-2 content-center justify-between md:w-1/2 md:justify-end">
+                <ul class="list-reset flex justify-center flex-1 md:flex-none items-center">
+                    <li>
+                        <a class="inline-block py-2 px-3 text-white no-underline" href="#">Active</a>
+                    </li>
+                    <li>
+{#                        <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3"#}
+{#                           href="{{ path('articles_index') }}">#}
+{#                            Articles#}
+{#                        </a>#}
+                    </li>
+                    <li>
+                        <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="#">link</a>
+                    </li>
+                    <li>
+                        <a class="inline-block text-gray-600 no-underline hover:text-gray-200 hover:underline py-2 px-3" href="#">link</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 </html>
