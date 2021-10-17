@@ -2,17 +2,35 @@
 
 namespace App\Controller;
 
+use App\Entity\Person;
+use App\Form\PersonSelectionType;
+use Doctrine\ORM\EntityManagerInterface;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Redirect;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'home')]
-    public function index(): Response
+    private EntityManagerInterface $em;
+    public function __construct(EntityManagerInterface $em)
     {
+        $this->em = $em;
+    }
+
+    #[Route('/home', name: 'home')]
+    public function index(Request $request): Response
+    {
+        $form = $this->createForm(PersonSelectionType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $person = $form->getData();
+            return $this->redirectToRoute('purchases', ['name' => $person['name']->getId()]);
+        }
         return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+            'form' => $form->createView(),
         ]);
     }
 }

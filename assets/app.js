@@ -1,25 +1,1 @@
-/*
- * Welcome to your app's main JavaScript file!
- *
- * We recommend including the built version of this JavaScript file
- * (and its CSS file) in your base layout (base.html.twig).
- */
-import Alpine from 'alpinejs'
-
-
-
-Alpine.data('dropdown', () => ({
-    open: false,
-
-    toggle() {
-        this.open = ! this.open
-    }
-}))
-window.Alpine = Alpine;
-window.Alpine.start();
-// any CSS you import will output into a single css file (app.scss in this case)
-import './styles/app.scss';
-
-// start the Stimulus application
-import './bootstrap';
-
+/* * Welcome to your app's main JavaScript file! * * We recommend including the built version of this JavaScript file * (and its CSS file) in your base layout (base.html.twig). */var $ = require('jquery');window.$ = window.jQuery = $;import Alpine from 'alpinejs'Alpine.data('dropdown', () => ({    open: false,    toggle() {        this.open = ! this.open    }}))window.Alpine = Alpine;window.Alpine.start();// function foo() {////     // your function code here//     alert('hello');////     setTimeout(foo, 5000);// }// $(document).ready(function() {//     foo();// });// // any CSS you import will output into a single css file (app.scss in this case)import './styles/app.scss';// start the Stimulus applicationimport './bootstrap';
