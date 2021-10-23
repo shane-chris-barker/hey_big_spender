@@ -25,11 +25,12 @@ class PurchasesController extends AbstractController
     {
         $order      = $request->get('ordering');
         $person     = $request->get('id');
-
         $data       = $this->em->getRepository(Purchases::class)->findByPersonAndOrder($person, $order);
 
         $response = [
-            'item' => $data[0]->getItem()
+            'item'  => $data[0]->getItem(),
+            'image' => $data[0]->getImagePath(),
+            'about' => $data[0]->getText()
         ];
 
 
@@ -43,9 +44,20 @@ class PurchasesController extends AbstractController
     #[Route('/purchases/{name}', name: 'purchases')]
     public function index(Request $request): Response
     {
-        $name = $request->get('name');
-        $person = $this->em->getRepository(Person::class)->find($name);
-        $earningsPerSecond = $person->getEarningsPerSecond() / 100;
+        $name               = $request->get('name');
+        $person             = $this->em->getRepository(Person::class)->findOneBy(['slug' => $name]);
+
+        if (empty($person)) {
+            // stop cheating. That person doesn't exist in the system.
+            return $this->redirectToRoute('home');
+        }
+        $earningsPerSecond  = $person->getEarningsPerSecond() / 100;
+        // so we know whether to load an image or show the default avatar
+
+        $imagePath = 'build/images/avatar.png';
+        if (empty($person->getImagePath())) {
+           $person->setImagePath($imagePath);
+        }
 
         return $this->render('purchases/index.html.twig', [
             'person'   => $person,

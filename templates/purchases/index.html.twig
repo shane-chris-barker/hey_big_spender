@@ -9,33 +9,47 @@
             <div class="w-full xl:w-3/4 lg:w-11/12 flex">
                 <!-- Col -->
                 <div class="w-full h-auto bg-gray-400 hidden lg:block lg:w-1/2 bg-cover rounded-l-lg"
-                     style="background-image: url('https://source.unsplash.com/oWTW-jNGl9I/600x800')"
+                     style="background-image: url({{ person.imagePath }})"
                 ></div>
                 <!-- Col -->
-                <div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none">
+                <div class="w-full lg:w-1/2 bg-white p-5 rounded-lg lg:rounded-l-none mx-auto">
                     <div class="hidden" id="person" data-personId="{{ person.id }}" data-earningsPerSecond="{{ earnings }}"></div>
+
                     <div class="px-8 mb-4 text-center">
                         <h3 class="pt-4 mb-2 text-2xl">You've had this page open for <span id="demo"></span></h3>
                         <p class="mb-4 text-xl text-gray-700">
                             In that time, <span class="text-bold">{{person.name}}</span> has earned approximately:
                         </p>
                     </div>
-                    <span id="hiddenEarnings" class=" text-2xl text-center col-4 offset-4">
+
+                    <span id="hiddenEarnings" class="text-2xl text-center col-4 offset-4">
                         Earnings: $<span id="earnings"></span>
                     </span>
-                    <div class="mb-4 text-center">
-                        <p class="mb-4 text-xl text-gray-700">
-                           That's enough to buy....
-                        </p>
-                        <div id="purchaseOutput">
+                    <div>
+                        <div class="hidden" id="results-pane"></div>
+                        <div class="mb-4 text-center">
+                            <p class="mb-4 text-xl text-gray-700">
+                               That's enough to buy....
+                            </p>
                         </div>
-                        <div id="nextUpdateIn"></div>
+                        <div class="card col-10 offset-1">
+
+                            <div id="spinner" class="text-center mt-2">
+                                <i class="fa fa-dollar-sign fa-spin fa-4x"></i><br>Gathering Data...
+                            </div>
+                            <div id="nextUpdateIn" class="text-center"></div>
+
+                            <img id="purchase-image" class="card-img-top hidden" src="" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title text-center text-2xl" id="purchase-output"></h5>
+                                <p class="card-text" id="purchase-info"></p>
+                                <a href="#" class="btn btn-primary mt-5">Go somewhere</a>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="mb-4 text-center">
-                        <i class="fa fa-dollar-sign fa-spin fa-4x"></i>
-                        <div>Gathering Data...</div>
-                    </div>
+
+
 
                     <script>
 
@@ -56,7 +70,17 @@
                                     xhr.overrideMimeType( "text/plain; charset=x-user-defined" );
                                 }
                             }).done(function( data ) {
-                                $('#purchaseOutput').html(data.item);
+                                $('#purchase-output').html(data.item);
+                                $('#purchase-info').html(data.about);
+                                $('#purchase-image').attr('src', data.image).removeClass('hidden')
+                                // $('#purchase-image').removeClass('hidden')
+                                console.log(data);
+
+                                if (false === calledBefore) {
+                                    $('#spinner').addClass('hidden');
+                                    $('#result-pane').removeClass('hidden');
+                                    calledBefore = true;
+                                }
                             });
 
                         }
@@ -92,7 +116,7 @@
 
                             if (seconds % 10 === 0) {
                                 ordering++;
-                               callApi(ordering, personId);
+                                callApi(ordering, personId);
                             }
                         }, 1000);
                     </script>
