@@ -16,6 +16,7 @@ class PersonSelectionType extends AbstractType
         $builder->add('name', EntityType::class,
             [
                 'class'         => Person::class,
+                'attr'          => ['class' => 'form-select block w-full'],
                 'placeholder'   => 'Choose your hero',
                 'choice_label'  => function(Person $person) {
                     return sprintf( '%s', $person->getName());

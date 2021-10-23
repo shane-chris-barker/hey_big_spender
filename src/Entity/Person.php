@@ -40,6 +40,11 @@ class Person
      */
     private $image_path;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
+
 
     public function __construct()
     {
@@ -113,6 +118,18 @@ class Person
     public function setImagePath(?string $image_path): self
     {
         $this->image_path = $image_path;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
